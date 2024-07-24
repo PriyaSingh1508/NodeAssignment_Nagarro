@@ -1,0 +1,102 @@
+<%- include("../partials/base.ejs") %>
+
+<head>
+    <%- include("../partials/header.ejs") %>
+    <title>Add Teacher Account</title>
+    <script src="/js/confirm_password.js" type="module" defer></script>
+     
+    <script>
+        let viewData = JSON.parse('<%- JSON.stringify(viewData) %>')            
+    </script>
+</head>
+
+<body style="background-color: rgb(239, 204, 192);">
+    <%- include("../partials/teachernavBar.ejs") %>
+
+      <div class="container p-20 d-flex">
+
+        <div class="create-teacher-form w-50 p-5">
+
+            <form action="/teacher/create" method="post">
+                <div class="mb-3">
+
+                    <% if(viewData?.errors?.field?.email) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.email %> </span>
+                          </div>
+                      <% } %>
+
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" value="<%- viewData?.teacher?.email  %>" class="form-control" id="email" placeholder="" required>
+                </div>
+                <div class="mb-3">
+
+                    <% if(viewData?.errors?.field?.firstName) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.firstName %> </span>
+                          </div>
+                      <% } %>
+
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" name="firstName" class="form-control" value="<%- viewData?.teacher?.firstName  %>" id="firstName" placeholder="" required>
+                </div>
+                
+                <div class="mb-3">
+
+                    <% if(viewData?.errors?.field?.lastName) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.lastName %> </span>
+                          </div>
+                      <% } %>
+
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" name="lastName" class="form-control" id="lastName" value="<%- viewData?.teacher?.lastName  %>" placeholder="" required>
+                </div>
+
+                <div class="mb-3">
+
+                    <% if(viewData?.errors?.field?.password) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.password %> </span>
+                          </div>
+                      <% } %>
+
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="password"  placeholder="" required>
+                </div>
+                
+
+
+                <div class="mb-3">
+                    <div id="cpassword-error"></div>
+                    <% if(viewData?.errors?.field?.confirmPassword) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.confirmPassword %> </span>
+                          </div>
+                      <% } %>
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
+                </div>
+
+                <a href="/teacher/dashboard">Back to Dashboard</a>
+                <div class="p-2">
+                    <button class="btn btn-primary" type="submit" id="create-teacher">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </div>
+                
+                
+              </form>
+                
+
+        </div>
+        <!-- <div class="teacher-img w-50 p-5">
+            <div class="align-self-center">
+                <img class="w-100" src="/img/teacher.avif" alt="create teacher">
+            </div>
+        </div> -->
+        
+      </div>
+</body>
+
+<%- include("../partials/base.ejs") %>

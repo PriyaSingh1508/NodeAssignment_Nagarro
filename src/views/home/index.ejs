@@ -1,0 +1,214 @@
+<%- include("../partials/base.ejs") %>
+
+<head>
+    <%- include("../partials/header.ejs") %>
+    <title>Login</title>
+
+    <style>
+            /* styles.css */
+        body {
+            background: linear-gradient(0deg, #d9dae1 0%, rgb(58, 183, 154) 100%);
+            width: 100vw;
+            height: 100vh;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Navigation Options */
+        #teacher-tab-option,
+        #student-tab-option {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f2f2f2;
+            font-weight: bold;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        /* Form Container */
+        .container.w-75 {
+            max-width: 600px;
+        }
+
+        /* Forms */
+        form {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        /* Media Query for Smaller Screens */
+        @media (max-width: 768px) {
+            .container.w-75 {
+                width: 90%;
+            }
+            
+            /* Stack navigation options vertically */
+            #teacher-tab-option,
+            #student-tab-option {
+                display: block;
+            }
+            
+            /* Adjust form padding for small screens */
+            form {
+                padding: 15px;
+            }
+        }
+        /* styles.css */
+
+        #teacher-tab-option,
+        #student-tab-option {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f2f2f2;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #teacher-tab-option:hover,
+        #student-tab-option:hover {
+            background-color: #ddd;
+        }
+
+        /* Styling for tab content */
+        #teacher-tab,
+        #student-tab {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        #hea{
+            font-weight:400px;
+        }
+
+    </style>
+
+    <script src="js/index.js" type="module" defer></script>
+    
+    
+    <script>
+        let viewData = JSON.parse('<%- JSON.stringify(viewData) %>')            
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container d-flex align-self-center align-items-center w-100">
+
+        <div  class="container w-100 h-50 rounded-4 bg-light align-self-center align-items-center">
+            <h2 id="hea">Teacher-Student Login</h2>
+
+            <span id="teacher-tab" class="d-flex justify-content-center align-items-center p-5">
+                <div class="d-flex flex-column w-100">
+                  <!-- Teacher -->
+
+                 
+                  <div class="d-flex ">
+                    <div id="teacher-tab-option" class="w-50 text-center">Teacher</div>
+                   
+                </div>
+
+                  <form action="" method="post">
+                    <div class="mb-3">
+
+                        <% if(viewData?.errors?.field?.email) { %>
+                            <div >
+                                <span class="badge bg-danger"><%- viewData?.errors?.field?.email %> </span>
+                              </div>
+                          <% } %>
+
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <% if(viewData?.errors?.field?.password) { %>
+                            <div >
+                                <span class="badge bg-danger"><%- viewData?.errors?.field?.password %> </span>
+                              </div>
+                          <% } %>
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" required>
+                    </div>
+                    <!-- <button type="button" id="show-password">Show Password</button> -->
+                    <button class="btn btn-dark rounded-pill" type="submit" id="login">Login</button>
+                  </form>
+                    
+    
+                </div>
+                <!-- <div class="d-flex flex-column w-50 h-100 p-2">
+    
+                    <div class="align-self-center">
+                        <img class="w-50" src="img/teacher-ai.png" alt="teacher login">
+                    </div>
+                </div> -->
+                
+            </span>
+
+            <span id="student-tab" class="d-flex justify-content-center align-items-center p-5">
+                <div class="d-flex flex-column w-100">
+                  <!-- Student -->
+        <div class="d-flex ">
+            <div id="student-tab-option" class="w-50 text-center">Student</div>
+        </div>
+                  <form action="" method="post">
+
+                    <div class="mb-3">
+                        <% if(viewData?.errors?.field?.rollNo) { %>
+                            <div >
+                                <span class="badge bg-danger"><%- viewData?.errors?.field?.email %> </span>
+                              </div>
+                          <% } %>
+                        <label for="rollNo" class="form-label">Roll No</label>
+                        <input type="number" name="rollNo" class="form-control" id="rollNo" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <% if(viewData?.errors?.field?.dob) { %>
+                            <div >
+                                <span class="badge bg-danger"><%- viewData?.errors?.field?.email %> </span>
+                              </div>
+                          <% } %>
+                        <label for="dob" class="form-label">DOB</label>
+                        <input type="date" name="dob" class="form-control" id="dob">
+                    </div>
+                    <button class="btn btn-dark rounded-pill" type="submit" id="search">Search</button>
+    
+                  </form>
+                    
+                </div>
+                <!-- <div class="d-flex flex-column w-50 h-100 p-2">
+    
+                    <!-- <div class="align-self-center">
+                        <img class="w-50" src="img/student-ai.png" alt="teacher login">
+                    </div> -->
+                </div> -->
+                
+            </span>
+        </div>
+
+
+    </div>
+</body>
+
+<%- include("../partials/base.ejs") %>

@@ -1,0 +1,51 @@
+<%- include("../partials/base.ejs") %>
+
+<head>
+    <%- include("../partials/header.ejs") %>
+    <title>Teacher Dashboard</title>
+
+    
+
+</head>
+
+<body style="background-color: rgb(146, 164, 198);">
+    <%- include("../partials/teachernavBar.ejs") %>
+    <% var options = { year: 'numeric', month: 'long', day: 'numeric' }; %>
+
+      <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">Seq No</th>
+                  <th scope="col">Roll no</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">DOB</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Operations</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <% let i = 1; viewData.students.forEach(item => { %>
+                    <tr>
+                        <th scope="row"> <%- i++ %>  </th>
+                        <td> <%- item.rollNo %> </td>
+                        <td> <%- item.name %> </td>
+                        <td> <%- new Date(item.dob).toLocaleDateString("en-US", options) %> </td>
+                        <td> <%- item.score %> </td>
+                        <td> 
+                          <form action="/teacher/dashboard/student/<%- item.id %>/edit" method="get">
+                            <button class="btn btn-info rounded-pill"><i class="fas fa-edit"></i></button>
+                          </form>
+                            <form action="/teacher/student/<%- item.id %>/delete" method="get">
+                              <button class="btn btn-danger rounded-pill"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+              </tbody>
+        </table>
+      </div>
+</body>
+
+<%- include("../partials/base.ejs") %>

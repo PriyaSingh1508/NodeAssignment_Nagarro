@@ -1,0 +1,88 @@
+<%- include("../partials/base.ejs") %>
+
+<head>
+    <%- include("../partials/header.ejs") %>
+    <title>Create Student</title>
+     
+    <script>
+        let viewData = JSON.parse('<%- JSON.stringify(viewData) %>')            
+    </script>
+</head>
+
+<body style="background-color: rgb(239, 204, 192);">
+    <%- include("../partials/teachernavBar.ejs") %>
+
+      <div class="container p-20 d-flex">
+
+        <div class="create-student-form w-50 p-5">
+
+            <form action="/teacher/student/create" method="post">
+                <div class="mb-3">
+
+                    <% if(viewData?.errors?.field?.rollNo) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.rollNo %> </span>
+                          </div>
+                      <% } %>
+
+                    <label for="rollNo" class="form-label">Roll No</label>
+                    <input type="number" name="rollNo" class="form-control" value="<%- viewData?.student?.rollNo  %>" id="rollNo" placeholder="" required>
+                </div>
+                <div class="mb-3">
+
+                    <% if(viewData?.errors?.field?.name) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.name %> </span>
+                          </div>
+                      <% } %>
+
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" value="<%- viewData?.student?.name  %>" class="form-control" id="name" placeholder="" required>
+                </div>
+                
+
+                <div class="mb-3">
+
+                    <% if(viewData?.errors?.field?.dob) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.dob %> </span>
+                          </div>
+                      <% } %>
+
+                    <label for="dob" class="form-label">DOB</label>
+                    <input type="date" name="dob" class="form-control" id="dob"  placeholder="" required>
+                </div>
+                
+
+                <div class="mb-3">
+                    <% if(viewData?.errors?.field?.score) { %>
+                        <div >
+                            <span class="badge bg-danger"><%- viewData?.errors?.field?.score %> </span>
+                          </div>
+                      <% } %>
+                    <label for="score" class="form-label">Score</label>
+                    <input type="number" name="score" class="form-control" id="score" value="<%- viewData?.student?.score  %>" required>
+                </div>
+                <a href="/teacher/dashboard">Back to Dashboard</a>
+
+                <div class="p-2">
+                    <button class="btn btn-primary" type="submit" id="create-student">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                    
+                </div>
+              
+              </form>
+                
+
+        </div>
+        <!-- <div class="student-img w-50 p-5">
+            <div class="align-self-center">
+                <img class="w-100" src="/img/student.avif" alt="create student">
+            </div>
+        </div> -->
+        
+      </div>
+</body>
+
+<%- include("../partials/base.ejs") %>
